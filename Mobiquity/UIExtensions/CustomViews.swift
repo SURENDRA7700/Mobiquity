@@ -1,0 +1,907 @@
+//
+//  CustomViews.swift
+//  Rasedi
+//
+//  Created by Vijesh on 29/03/2018.
+//  Copyright © 2018 DNet. All rights reserved.
+//
+
+import UIKit
+
+
+
+class NormalField: UITextField {
+    
+    required override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.font = UIFont.primaryEnglish(size: 12)
+        self.textColor = UIColor.darkGray
+        self.borderStyle = UITextField.BorderStyle.none
+        
+        
+        self.layer.cornerRadius = 6.0
+        self.layer.borderWidth = 0.5
+        
+        
+        
+        self.backgroundColor = UIColor.white
+        self.autocorrectionType = UITextAutocorrectionType.no
+        self.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+        self.textAlignment = NSTextAlignment.center
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
+        var rightViewRect = super.rightViewRect(forBounds: bounds)
+        rightViewRect.origin.x -= 6
+        return rightViewRect
+    }
+    
+    override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
+        var leftViewRect = super.leftViewRect(forBounds: bounds)
+        leftViewRect.origin.x += 6
+        return leftViewRect
+    }
+    
+//    override func textRect(forBounds bounds: CGRect) -> CGRect {
+//        return UIEdgeInsetsInsetRect(bounds, UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30))
+//    }
+//
+//    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+//        return UIEdgeInsetsInsetRect(bounds, UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30))
+//    }
+//
+//    override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+//        return UIEdgeInsetsInsetRect(bounds, UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30))
+//    }
+    
+}
+
+
+
+class IconRegisterField: RegisterField {
+
+    override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
+        var rightViewRect = super.rightViewRect(forBounds: bounds)
+        rightViewRect.origin.x -= 10
+        return rightViewRect
+    }
+    
+    override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
+        var leftViewRect = super.leftViewRect(forBounds: bounds)
+        leftViewRect.origin.x += 5
+        return leftViewRect
+    }
+    
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        
+        //        return UIEdgeInsetsInsetRect(bounds, UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 55))
+    }
+    
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 55))
+    }
+    
+    override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 55))
+    }
+    
+    func setRightViewIcon(imageName: String?)  {
+        guard let imageIcon = imageName else {return}
+
+        let img = UIImage(named: imageIcon)?.withRenderingMode(.alwaysTemplate)
+        let imageView = UIImageView(image: img)
+        imageView.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = UIColor.black
+
+        self.rightView = imageView
+        self.rightViewMode = UITextField.ViewMode.always
+        self.rightView?.clipsToBounds = true
+        
+    }
+    
+    
+    
+}
+
+
+
+extension UILabel{
+    
+    func makeCompanyLabel(isBottom: Bool = true)  {
+        let lineView = UIView()
+        self.addSubview(lineView)
+        if isBottom == false {
+            lineView.bottomAnchor.constraint(equalTo: self.topAnchor, constant:0).isActive = true
+        }else{
+            lineView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant:0).isActive = true
+        }
+        lineView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0).isActive = true
+        lineView.trailingAnchor.constraint(equalToSystemSpacingAfter: self.trailingAnchor, multiplier: 0).isActive = true
+        lineView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        lineView.translatesAutoresizingMaskIntoConstraints = false
+        
+        lineView.backgroundColor = UIColor.lightGray
+        
+        textAlignment = .center
+//        self.textColor = UIColor.secondaryColor
+    }
+}
+
+
+
+class RegisterField: UITextField {
+    
+    required override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.font = UIFont.primaryArabic(size: 15)
+        self.textColor = UIColor.darkGray
+        self.borderStyle = UITextField.BorderStyle.none
+//        self.backgroundColor = UIColor.Areeb.darkColor
+        self.autocorrectionType = UITextAutocorrectionType.no
+        self.autocapitalizationType = .none
+        self.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+        self.textAlignment = .right
+        self.textColor = UIColor.ketoGenik.Black
+        self.borderStyle = .roundedRect
+        self.layer.cornerRadius = 8.0
+        self.layer.borderWidth = 1.0
+        self.layer.borderColor = UIColor.ketoGenik.borderGray.cgColor
+        self.clipsToBounds = true;
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
+        var rightViewRect = super.rightViewRect(forBounds: bounds)
+        rightViewRect.origin.x -= 5
+        return rightViewRect
+    }
+    
+    override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
+        var leftViewRect = super.leftViewRect(forBounds: bounds)
+        leftViewRect.origin.x += 5
+        return leftViewRect
+    }
+    
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        
+//        return UIEdgeInsetsInsetRect(bounds, UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
+    }
+    
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
+    }
+    
+    override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
+    }
+    
+    
+    func setFieldImageIcon(imageName: String?) {
+        guard let imageIcon = imageName else {
+            return
+        }
+        let img = UIImage(named: imageIcon)?.withRenderingMode(.alwaysTemplate)
+        let imageView = UIImageView(image: img)
+        imageView.frame = CGRect(x: 0, y: 0, width: 18, height: 18)
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = UIColor.rgb(red: 160, green: 160, blue: 160)
+        self.leftView = imageView
+        self.leftViewMode = UITextField.ViewMode.always
+        self.leftView?.clipsToBounds = true
+    }
+
+    
+
+  
+
+}
+
+class mobileField: RegisterField {
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        
+        //        return UIEdgeInsetsInsetRect(bounds, UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 50))
+    }
+    
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 50))
+    }
+    
+    override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 50))
+    }
+    
+
+    
+    
+}
+
+
+
+
+class FullWidthTextField: UITextField {
+    
+    required override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.font = UIFont(name: "Cairo", size: 15.0)
+        self.textColor = UIColor.darkGray
+        self.borderStyle = UITextField.BorderStyle.none
+        self.backgroundColor = UIColor.white
+        self.layer.borderWidth = 0.3
+//        self.layer.borderColor = UIColor.normalColor.cgColor
+        self.autocorrectionType = UITextAutocorrectionType.no
+        self.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
+        var rightViewRect = super.rightViewRect(forBounds: bounds)
+        rightViewRect.origin.x -= 5
+        return rightViewRect
+    }
+    
+    override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
+        var leftViewRect = super.leftViewRect(forBounds: bounds)
+        leftViewRect.origin.x += 5
+        return leftViewRect
+    }
+//
+//    override func textRect(forBounds bounds: CGRect) -> CGRect {
+//        return UIEdgeInsetsInsetRect(bounds, UIEdgeInsetsMake(0, 30, 0, 30))
+//    }
+//
+//    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+//        return UIEdgeInsetsInsetRect(bounds, UIEdgeInsetsMake(0, 30, 0, 30))
+//    }
+//
+//    override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+//        return UIEdgeInsetsInsetRect(bounds, UIEdgeInsetsMake(0, 30, 0, 30))
+//    }
+    
+}
+
+
+class DropDownField: UITextField {
+    
+    required override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.font = UIFont.primaryArabic(size: 15)
+
+        self.textColor = UIColor.white
+        self.borderStyle = UITextField.BorderStyle.none
+        self.backgroundColor = UIColor.white
+        self.layer.cornerRadius = 2.0
+//        self.layer.borderWidth = 0.5
+//        self.layer.borderColor = UIColor.disableColor.cgColor
+        self.autocorrectionType = UITextAutocorrectionType.no
+        self.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+        self.textAlignment = NSTextAlignment.center
+        
+      
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func caretRect(for position: UITextPosition) -> CGRect {
+        return .zero
+    }
+    
+//    override func selectionRects(for range: UITextRange) -> [Any] {
+//        return []
+//    }
+    
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        if action == #selector(copy(_:)) || action == #selector(selectAll(_:)) || action == #selector(paste(_:)) {
+            return false
+        }
+        return super.canPerformAction(action, withSender: sender)
+    }
+    
+    override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
+        var rightViewRect = super.rightViewRect(forBounds: bounds)
+        rightViewRect.origin.x -= 4
+        return rightViewRect
+    }
+    
+    override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
+        var leftViewRect = super.leftViewRect(forBounds: bounds)
+        leftViewRect.origin.x += 4
+        return leftViewRect
+    }
+    
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        
+        //        return UIEdgeInsetsInsetRect(bounds, UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
+    }
+    
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
+    }
+    
+    override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
+    }
+    
+    func setBottomLine()  {
+        //        guard let imageIcon = imageName else {return}
+        //
+        //        let img = UIImage(named: imageIcon)?.withRenderingMode(.alwaysTemplate)
+        //        let imageView = UIImageView(image: img)
+        //        imageView.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        //        imageView.contentMode = .scaleAspectFit
+        //        imageView.tintColor = UIColor.black
+        //
+        //        self.rightView = imageView
+        //        self.rightViewMode = UITextField.ViewMode.always
+        //        self.rightView?.clipsToBounds = true
+        
+        let lineView = UIView()
+        self.addSubview(lineView)
+        lineView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant:0).isActive = true
+        lineView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0).isActive = true
+        lineView.trailingAnchor.constraint(equalToSystemSpacingAfter: self.trailingAnchor, multiplier: 0).isActive = true
+        lineView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        lineView.translatesAutoresizingMaskIntoConstraints = false
+        
+        lineView.backgroundColor = UIColor.lightGray
+    }
+    
+    
+}
+
+
+
+extension DropDownField {
+    
+    func setFieldImageIcon(imageName: String?) {
+        
+        guard let imageIcon = imageName else {return}
+        
+        let img = UIImage(named: imageIcon)?.withRenderingMode(.alwaysTemplate)
+        let imageView = UIImageView(image: img)
+        imageView.frame = CGRect(x: 0, y: 0, width: 15, height: 15)
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = UIColor.rgb(red: 150, green: 150, blue: 150)
+        
+//        if LangUtils.isLangArabic() {
+//
+            self.leftView = imageView
+            self.leftViewMode = UITextField.ViewMode.always
+            self.leftView?.clipsToBounds = true
+//
+//        } else {
+//
+//            self.rightView = imageView
+//            self.rightViewMode = UITextField.ViewMode.always
+//            self.rightView?.clipsToBounds = true
+//        }
+        
+    }
+    
+    func setRightViewIcon(imageName: String?)  {
+        guard let imageIcon = imageName else {return}
+
+        let img = UIImage(named: imageIcon)?.withRenderingMode(.alwaysTemplate)
+        let imageView = UIImageView(image: img)
+        imageView.frame = CGRect(x: 0, y: 0, width: 15, height: 15)
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = UIColor.rgb(red: 150, green: 150, blue: 150)
+        
+        self.rightView = imageView
+        self.rightViewMode = UITextField.ViewMode.always
+        self.rightView?.clipsToBounds = true
+    }
+    
+    func setRightFieldICon(imageName: String?) {
+        
+        guard let imageIcon = imageName else {return}
+        
+        let img = UIImage(named: imageIcon)?.withRenderingMode(.alwaysTemplate)
+        let imageView = UIImageView(image: img)
+        imageView.frame = CGRect(x: 0, y: 0, width: 15, height: 15)
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = UIColor.rgb(red: 150, green: 150, blue: 150)
+        
+//        if LangUtils.isLangArabic() {
+//
+//            self.leftView = imageView
+//            self.leftViewMode = UITextField.ViewMode.always
+//            self.leftView?.clipsToBounds = true
+//
+//        } else {
+//
+            self.rightView = imageView
+            self.rightViewMode = UITextField.ViewMode.always
+            self.rightView?.clipsToBounds = true
+//        }
+        
+    }
+}
+
+class IconDropdown: DropDownField {
+    override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
+        var rightViewRect = super.rightViewRect(forBounds: bounds)
+        rightViewRect.origin.x -= 10
+        return rightViewRect
+    }
+    
+    override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
+        var leftViewRect = super.leftViewRect(forBounds: bounds)
+        leftViewRect.origin.x += 10
+        return leftViewRect
+    }
+    
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        
+        //        return UIEdgeInsetsInsetRect(bounds, UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 35, bottom: 0, right: 40))
+    }
+    
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 35, bottom: 0, right: 40))
+    }
+    
+    override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 35, bottom: 0, right: 10))
+    }
+    
+    
+    
+}
+
+extension UIView{
+    func addGradientAlpha() {
+        self.alpha = 0.6
+        let gradient = CAGradientLayer()
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradient.endPoint = CGPoint(x: 0.0, y: 0.9)
+        let whiteColor = UIColor.white
+        gradient.colors = [whiteColor.withAlphaComponent(1.0).cgColor, whiteColor.withAlphaComponent(0.0).cgColor]
+        gradient.locations = [NSNumber(value: 0.0),NSNumber(value: 1.0)]
+        
+        gradient.frame = self.bounds
+        self.layer.mask = gradient
+        self.isHidden = false;
+    }
+    
+}
+
+
+class borderViews: UIView {
+    
+    let topLine: UIView = {
+        let view = UIView()
+        view.alpha = 1.0
+        //        view.backgroundColor = UIColor.green
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let bottomLine: UIView = {
+        let view = UIView()
+        view.alpha = 1.0
+        //        view.backgroundColor = UIColor.green
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    
+    required override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = UIColor.white
+        self.layer.cornerRadius = 4.0
+        self.layer.borderWidth = 0.5
+        self.layer.borderColor = UIColor.rgb(red: 210, green: 210, blue: 210).cgColor
+        
+        self.addSubview(topLine)
+        topLine.topAnchor
+    }
+    
+//    override func setNeedsLayout() {
+//        <#code#>
+//    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
+
+class LineRegisterField: DropDownField {
+    override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
+        var rightViewRect = super.rightViewRect(forBounds: bounds)
+        rightViewRect.origin.x -= 10
+        return rightViewRect
+    }
+    
+    override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
+        var leftViewRect = super.leftViewRect(forBounds: bounds)
+        leftViewRect.origin.x += 10
+        return leftViewRect
+    }
+    
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        
+        //        return UIEdgeInsetsInsetRect(bounds, UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
+    }
+    
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
+    }
+    
+    override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
+    }
+    
+    
+}
+
+
+
+class DateTextField: UITextField {
+    
+    required override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.font = UIFont(name: "Cairo", size: 15.0)
+        self.textColor = UIColor.darkGray
+        self.borderStyle = UITextField.BorderStyle.none
+        self.backgroundColor = UIColor.white
+        self.layer.cornerRadius = 4.0
+        self.layer.borderWidth = 0.5
+        self.layer.borderColor = UIColor.rgb(red: 210, green: 210, blue: 210).cgColor
+        self.autocorrectionType = UITextAutocorrectionType.no
+        self.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+        self.textAlignment = NSTextAlignment.center
+    }
+    
+    override func caretRect(for position: UITextPosition) -> CGRect {
+        return .zero
+    }
+//
+//    override func selectionRects(for range: UITextRange) -> [Any] {
+//        return []
+//    }
+    
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        if action == #selector(copy(_:)) || action == #selector(selectAll(_:)) || action == #selector(paste(_:)) {
+            return false
+        }
+        return super.canPerformAction(action, withSender: sender)
+    }
+    
+    override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
+        var rightViewRect = super.rightViewRect(forBounds: bounds)
+        rightViewRect.origin.x -= 10
+        return rightViewRect
+    }
+    
+    override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
+        var leftViewRect = super.leftViewRect(forBounds: bounds)
+        leftViewRect.origin.x += 10
+        return leftViewRect
+    }
+    
+//    override func textRect(forBounds bounds: CGRect) -> CGRect {
+//        return UIEdgeInsetsInsetRect(bounds, UIEdgeInsetsMake(0, 10, 0, 10))
+//    }
+//    
+//    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+//        return UIEdgeInsetsInsetRect(bounds, UIEdgeInsetsMake(0, 10, 0, 10))
+//    }
+//    
+//    override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+//        return UIEdgeInsetsInsetRect(bounds, UIEdgeInsetsMake(0, 10, 0, 10))
+//    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
+
+
+class PaddingLabel: UILabel {
+    var topInset: CGFloat = 0.0
+    var bottomInset: CGFloat = 0.0
+    var leftInset: CGFloat = 0.0
+    var rightInset: CGFloat = 10.0
+    
+    override func drawText(in rect: CGRect) {
+        let insets = UIEdgeInsets.init(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
+        super.drawText(in:rect.inset(by: insets))
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        var intrinsicSuperViewContentSize = super.intrinsicContentSize
+        intrinsicSuperViewContentSize.height += topInset + bottomInset
+        intrinsicSuperViewContentSize.width += leftInset + rightInset
+        return intrinsicSuperViewContentSize
+    }
+}
+
+
+
+
+class KetoImageButton: KetoButton {
+    
+    required override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    func setImage(img:UIImage)  {
+        self.setImage(img: img)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+    }
+    
+    
+    
+    func leftImage(image: UIImage, renderMode: UIImage.RenderingMode) {
+           self.setImage(image.withRenderingMode(renderMode), for: .normal)
+           self.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: image.size.width / 2)
+           self.contentHorizontalAlignment = .left
+           self.imageView?.contentMode = .scaleAspectFit
+       }
+
+    func rightImage(image: UIImage, renderMode: UIImage.RenderingMode){
+        self.setImage(image.withRenderingMode(renderMode), for: .normal)
+        
+        imageEdgeInsets = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 10)
+        titleEdgeInsets = UIEdgeInsets(top: 0, left: 40, bottom: 0, right: 0)
+        self.contentHorizontalAlignment = .left
+        
+        self.imageView?.contentMode = .scaleAspectFit
+    }
+    
+    
+
+    
+}
+
+
+class KetoButton: UIButton {
+    
+    private var shadowLayer: CAShapeLayer!
+    var cornerRadius: CGFloat = 8.0
+    var shadowRadius: CGFloat = 6
+    var fillColor: UIColor = UIColor.ketoGenik.Blue // the color applied to the shadowLayer, rather than the view's backgroundColor
+    var customBGColor : UIColor!
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        if shadowLayer == nil {
+            shadowLayer = CAShapeLayer()
+          
+            shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).cgPath
+            shadowLayer.fillColor = fillColor.cgColor
+            shadowLayer.shadowColor = UIColor.ketoGenik.Blue.cgColor
+            shadowLayer.shadowPath = shadowLayer.path
+            shadowLayer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+            shadowLayer.shadowOpacity = 0.6
+            shadowLayer.shadowRadius = shadowRadius
+
+            layer.insertSublayer(shadowLayer, at: 0)
+        }
+    }
+    
+    func updateFillColor(){
+        shadowLayer.fillColor = fillColor.cgColor
+    }
+    
+    func updateShadowColor(color : UIColor ){
+        shadowLayer.shadowColor = color.cgColor
+    }
+    
+    required override init(frame: CGRect) {
+        super.init(frame: frame)
+//        self.backgroundColor = UIColor.clear
+//        self.addSubview(btnShowHidePassword)
+//        btnShowHidePassword.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20).isActive = true
+//        btnShowHidePassword.widthAnchor.constraint(equalToConstant: 24).isActive = true
+//        btnShowHidePassword.heightAnchor.constraint(equalToConstant: 24).isActive = true
+//        btnShowHidePassword.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
+//        btnShowHidePassword.addTarget(self, action: #selector(showpassword), for: .touchDown)
+//        btnShowHidePassword.addTarget(self, action: #selector(hidePasword), for: .touchCancel)
+//
+
+        }
+    
+    required init?(coder aDecoder: NSCoder) {
+             super.init(coder: aDecoder)
+             
+         }
+       
+    
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+}
+
+
+
+
+class CornerShadowView: UIView {
+    
+    var shadowLayer: CAShapeLayer!
+    var cornerRadius: CGFloat = 8.0
+    var shadowRadius: CGFloat = 6
+    var borderLayer : CAShapeLayer!
+
+//    var displayShadow : Bool = true {
+//        didSet{
+//            shadowLayer = nil
+//        }
+//    }
+
+    var fillColor: UIColor = UIColor.white // the color applied to the shadowLayer, rather than the view's backgroundColor
+     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+//        if shadowLayer == nil {
+            for item in self.layer.sublayers ?? [] where item.name == "myShadowLayer" {
+                item.removeFromSuperlayer()
+            }
+            shadowLayer = CAShapeLayer()
+          
+            shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).cgPath
+            shadowLayer.fillColor = fillColor.cgColor
+
+            shadowLayer.shadowColor = UIColor.ketoGenik.borderGray.cgColor
+            shadowLayer.shadowPath = shadowLayer.path
+            shadowLayer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+            shadowLayer.shadowOpacity = 0.6
+            shadowLayer.shadowRadius = shadowRadius
+            //if displayShadow == true
+            //{
+            shadowLayer.name = "myShadowLayer"
+                layer.insertSublayer(shadowLayer, at: 0)
+
+            //}
+//        }
+    }
+    
+    func updateFillColor(){
+        if shadowLayer == nil {
+            shadowLayer.fillColor = fillColor.cgColor
+        }
+    }
+    
+    func addBorder() {
+        //setup Border for Mask
+        //        if borderLayer == nil {
+        if borderLayer != nil {
+            borderLayer.removeFromSuperlayer()
+        }
+        borderLayer = CAShapeLayer()
+        borderLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).cgPath
+        borderLayer.lineWidth = 1
+        borderLayer.strokeColor = UIColor.ketoGenik.Blue.cgColor
+        borderLayer.fillColor = UIColor.clear.cgColor
+        borderLayer.frame = self.bounds
+        self.layer.addSublayer(borderLayer)
+        //        }
+        
+    }
+    func removeBorder() {
+        if borderLayer != nil{
+            borderLayer.removeFromSuperlayer()
+
+        }
+    }
+    
+    
+    required override init(frame: CGRect) {
+        super.init(frame: frame)
+//        self.backgroundColor = UIColor.clear
+//        self.addSubview(btnShowHidePassword)
+//        btnShowHidePassword.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20).isActive = true
+//        btnShowHidePassword.widthAnchor.constraint(equalToConstant: 24).isActive = true
+//        btnShowHidePassword.heightAnchor.constraint(equalToConstant: 24).isActive = true
+//        btnShowHidePassword.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
+//        btnShowHidePassword.addTarget(self, action: #selector(showpassword), for: .touchDown)
+//        btnShowHidePassword.addTarget(self, action: #selector(hidePasword), for: .touchCancel)
+//
+
+        }
+    
+   required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+    }
+}
+
+@IBDesignable class ShadowCustomView : UIView {
+    
+     var shadowLayer: CAShapeLayer!
+       var shadowRadius: CGFloat = 6
+//       var displayShadow : Bool = true {
+//           didSet{
+//               shadowLayer = nil
+//           }
+//       }
+
+       private var fillColor: UIColor = UIColor.white // the color applied to the shadowLayer, rather than the view's backgroundColor
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        
+        if shadowLayer == nil {
+            shadowLayer = CAShapeLayer()
+            shadowLayer.path = UIBezierPath(roundedRect:bounds, cornerRadius: cornerRadius).cgPath
+            shadowLayer.fillColor = fillColor.cgColor
+            
+            shadowLayer.shadowColor = UIColor.ketoGenik.borderGray.cgColor
+            shadowLayer.shadowPath = shadowLayer.path
+            shadowLayer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+            shadowLayer.shadowOpacity = 0.6
+            shadowLayer.shadowRadius = shadowRadius
+            layer.insertSublayer(shadowLayer, at: 0)
+        }
+        else{
+            shadowLayer.path = UIBezierPath(roundedRect:bounds, cornerRadius: cornerRadius).cgPath
+        }
+    }
+    
+    
+    func updateFillColor() {
+        shadowLayer.fillColor = (self.fillColor as! CGColor)
+       }
+       
+       func updateShadowColor(color : UIColor ){
+           shadowLayer.shadowColor = color.cgColor
+       }
+        
+    override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        layer.borderColor = borderColor?.cgColor
+        layer.borderWidth = borderWidth
+        layer.cornerRadius = cornerRadius
+    }
+
+    @IBInspectable var borderColor: UIColor? {
+        didSet {
+            layer.borderColor = borderColor?.cgColor
+            setNeedsLayout()
+        }
+    }
+
+    
+    @IBInspectable var borderWidth: CGFloat = 0.0 {
+        didSet {
+            layer.borderWidth = borderWidth
+            setNeedsLayout()
+        }
+    }
+
+    @IBInspectable var cornerRadius: CGFloat = 0.0 {
+        didSet {
+            layer.cornerRadius = cornerRadius
+            setNeedsLayout()
+        }
+    }
+}
+
+
